@@ -1,0 +1,7 @@
+AI Usage Report
+I used Gemini to help me build this portfolio based on my resume from KFUPM. It helped me move my background as a junior student with a 3.8 GPA into a working website.
++2
+
+The coolest thing I learned was using CSS variables like var(--primary). Before this I used to just write the hex code every time but now I can change the whole theme in one place. It makes the code much cleaner and easier to manage as a developer.
+
+I also spent time making the buttons look better. I added more fields like transition and border-radius and cursor pointer to make them feel more interactive. It was a good way to practice the basics of CSS while using AI to explain the logic behind the properties
