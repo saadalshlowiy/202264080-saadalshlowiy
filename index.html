@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saad Alshlowiy | Portfolio</title>
+    <title>Saad Alshlowiy | Portfolio v2</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -14,17 +14,19 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><button id="theme-toggle" class="btn-toggle">🌙</button></li>
             </ul>
         </nav>
     </header>
 
-    <section id="about" class="container">
+    <section id="about" class="container reveal">
+        <h2 id="dynamic-greeting">Welcome!</h2>
         <h1>Saad Alshlowiy</h1>
         <p class="tagline">Computer Science Student at KFUPM | Aspiring Backend Developer</p>
         <p>I am a junior student focused on building efficient server-side applications and exploring network engineering. With a GPA of 3.8, I am committed to technical excellence and proactive learning.</p>
     </section>
 
-    <section id="projects" class="container">
+    <section id="projects" class="container reveal">
         <h2>Key Competencies</h2>
         <div class="project-grid">
             <div class="project-card">
@@ -42,14 +44,17 @@
         </div>
     </section>
 
-    <section id="contact" class="container">
+    <section id="contact" class="container reveal">
         <h2>Contact Me</h2>
         <p>Email: 594174700 | Based in Saudi Arabia</p>
+        
+        <div id="form-feedback" class="hidden"></div>
+
         <form id="contact-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Message for Saad" rows="5" required></textarea>
-            <button type="submit">Send Message</button>
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" placeholder="Message for Saad" rows="5" required></textarea>
+            <button type="submit" id="submit-btn">Send Message</button>
         </form>
     </section>
 

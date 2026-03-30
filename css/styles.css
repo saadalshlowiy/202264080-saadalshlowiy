@@ -1,8 +1,21 @@
 :root {
-    --primary: #004d40; /* Professional Teal */
+    --primary: #004d40;
     --accent: #00acc1;
     --dark: #263238;
     --light: #f5f5f5;
+    --text: #263238;
+    --card-bg: #ffffff;
+    --transition: all 0.3s ease;
+}
+
+/* Requirement 3: Dark Mode Styles */
+[data-theme="dark"] {
+    --primary: #80cbc4;
+    --accent: #4dd0e1;
+    --dark: #eceff1;
+    --light: #121212;
+    --text: #f5f5f5;
+    --card-bg: #1e1e1e;
 }
 
 body {
@@ -10,7 +23,8 @@ body {
     margin: 0;
     line-height: 1.6;
     background-color: var(--light);
-    color: var(--dark);
+    color: var(--text);
+    transition: var(--transition); /* Requirement 4: Smooth transitions */
 }
 
 .container {
@@ -19,11 +33,23 @@ body {
     padding: 3rem 1.5rem;
 }
 
+/* Requirement 4: Fade-in Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--dark);
+    background: #263238; /* Keep nav dark for contrast */
     color: white;
     padding: 1rem 10%;
     position: sticky;
@@ -35,21 +61,19 @@ nav ul {
     display: flex;
     list-style: none;
     gap: 25px;
+    align-items: center;
 }
 
-nav a { 
-    color: #cfd8dc; 
-    text-decoration: none; 
-    font-weight: 500;
-}
-
+nav a { color: #cfd8dc; text-decoration: none; font-weight: 500; }
 nav a:hover { color: white; }
 
-.tagline {
-    font-size: 1.2rem;
-    color: var(--accent);
-    font-weight: bold;
-    margin-bottom: 1rem;
+.btn-toggle {
+    background: none;
+    border: 1px solid #cfd8dc;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 20px;
 }
 
 .project-grid {
@@ -60,28 +84,37 @@ nav a:hover { color: white; }
 }
 
 .project-card {
-    background: white;
+    background: var(--card-bg);
     padding: 1.5rem;
     border-left: 5px solid var(--primary);
     border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease; /* Requirement 4: Hover Effect */
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
 }
 
 form {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    background: white;
+    background: var(--card-bg);
     padding: 2rem;
     border-radius: 8px;
 }
 
-input, textarea {
-    padding: 0.8rem;
-    border: 1px solid #ddd;
+#form-feedback {
+    padding: 1rem;
+    margin-bottom: 1rem;
     border-radius: 4px;
-    font-size: 1rem;
+    text-align: center;
 }
+
+.success { background-color: #c8e6c9; color: #2e7d32; }
+.error { background-color: #ffcdd2; color: #c62828; }
+.hidden { display: none; }
 
 button {
     background: var(--primary);
@@ -94,11 +127,4 @@ button {
     transition: 0.3s;
 }
 
-button:hover {
-    background: var(--accent);
-}
-
-@media (max-width: 600px) {
-    nav { flex-direction: column; text-align: center; }
-    nav ul { padding: 0; margin-top: 10px; }
-}
+button:hover { background: var(--accent); }
