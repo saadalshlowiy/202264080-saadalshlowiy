@@ -4,60 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saad Alshlowiy | Portfolio v2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header>
         <nav>
             <div class="logo">SA</div>
-            <ul>
+            <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><button id="theme-toggle" class="btn-toggle">🌙</button></li>
+                <li><button id="theme-toggle" class="btn-icon" title="Toggle Theme">🌙</button></li>
             </ul>
         </nav>
     </header>
 
-    <section id="about" class="container reveal">
-        <h2 id="dynamic-greeting">Welcome!</h2>
-        <h1>Saad Alshlowiy</h1>
-        <p class="tagline">Computer Science Student at KFUPM | Aspiring Backend Developer</p>
-        <p>I am a junior student focused on building efficient server-side applications and exploring network engineering. With a GPA of 3.8, I am committed to technical excellence and proactive learning.</p>
-    </section>
-
-    <section id="projects" class="container reveal">
-        <h2>Key Competencies</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <h3>Backend Development</h3>
-                <p>Knowledge of Django and Flask frameworks, along with SQL for data handling.</p>
+    <main>
+        <section id="about" class="container reveal">
+            <div class="hero-content">
+                <h2 id="dynamic-greeting">Welcome!</h2>
+                <h1>Saad Alshlowiy</h1>
+                <p class="tagline">Computer Science Student at KFUPM | Aspiring Backend Developer</p>
+                <p>I am a junior student focused on building efficient server-side applications and exploring network engineering. With a GPA of 3.8, I am committed to technical excellence and proactive learning.</p>
             </div>
-            <div class="project-card">
-                <h3>Network Engineering</h3>
-                <p>Cisco Certified (CCNAv7) with foundational skills in network setup and maintenance.</p>
+        </section>
+
+        <section id="projects" class="container reveal">
+            <h2>Technical Competencies</h2>
+            <p>Filter by my areas of expertise:</p>
+            
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">All Skills</button>
+                <button class="filter-btn" data-filter="backend">Backend</button>
+                <button class="filter-btn" data-filter="network">Networking</button>
+                <button class="filter-btn" data-filter="data">Data Science</button>
             </div>
-            <div class="project-card">
-                <h3>Data Science Basics</h3>
-                <p>Proficient in Python libraries like Pandas and Numpy for data visualization.</p>
+
+            <div class="project-grid" id="skill-grid">
+                <div class="project-card" data-category="backend">
+                    <div class="card-icon">⚙️</div>
+                    <h3>Backend Development</h3>
+                    <p>Knowledge of Django and Flask frameworks, along with SQL for data handling.</p>
+                </div>
+                <div class="project-card" data-category="network">
+                    <div class="card-icon">🌐</div>
+                    <h3>Network Engineering</h3>
+                    <p>Cisco Certified (CCNAv7) with foundational skills in network setup and maintenance.</p>
+                </div>
+                <div class="project-card" data-category="data">
+                    <div class="card-icon">📊</div>
+                    <h3>Data Science Basics</h3>
+                    <p>Proficient in Python libraries like Pandas and Numpy for data visualization.</p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="contact" class="container reveal">
-        <h2>Contact Me</h2>
-        <p>Email: 594174700 | Based in Saudi Arabia</p>
-        
-        <div id="form-feedback" class="hidden"></div>
+        <section class="container reveal api-section">
+            <div class="api-card">
+                <h3>💡 Daily Tech Insight</h3>
+                <div id="api-content">
+                    <p class="loading">Fetching inspiration from the cloud...</p>
+                </div>
+                <button id="refresh-api" class="btn-small">Get New Insight</button>
+            </div>
+        </section>
 
-        <form id="contact-form">
-            <input type="text" id="name" placeholder="Your Name" required>
-            <input type="email" id="email" placeholder="Your Email" required>
-            <textarea id="message" placeholder="Message for Saad" rows="5" required></textarea>
-            <button type="submit" id="submit-btn">Send Message</button>
-        </form>
-    </section>
+        <section id="contact" class="container reveal">
+            <h2>Contact Me</h2>
+            <p>Email: 594174700 | Based in Saudi Arabia</p>
+            
+            <div id="form-feedback" class="hidden"></div>
 
-    <script src="js/script.js"></script>
+            <form id="contact-form">
+                <div class="input-group">
+                    <input type="text" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Your Email" required>
+                </div>
+                <div class="input-group">
+                    <textarea id="message" placeholder="Message for Saad" rows="5" required></textarea>
+                </div>
+                <button type="submit" id="submit-btn">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Saad Alshlowiy | Built with HTML, CSS, and JS</p>
+    </footer>
+
+    <script src="js/scripts.js"></script>
 </body>
 </html>
