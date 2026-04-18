@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saad Alshlowiy | Portfolio v2</title>
+    <title>Saad Alshlowiy | Portfolio v3</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -13,7 +13,7 @@
             <div class="logo">SA</div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
-                <li><a href="#projects">Skills</a></li>
+                <li><a href="#projects">Skills & Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><button id="theme-toggle" class="btn-icon" title="Toggle Theme">🌙</button></li>
             </ul>
@@ -24,70 +24,85 @@
         <section id="about" class="container reveal">
             <div class="hero-content">
                 <h2 id="dynamic-greeting">Welcome!</h2>
+                <div id="visitor-form-container" class="visitor-setup">
+                    <input type="text" id="visitor-name-input" placeholder="What's your name?">
+                    <button id="save-visitor-btn" class="btn-small">Say Hello</button>
+                </div>
+                
                 <h1>Saad Alshlowiy</h1>
                 <p class="tagline">Computer Science Student at KFUPM | Aspiring Backend Developer</p>
-                <p>I am a junior student focused on building efficient server-side applications and exploring network engineering. With a GPA of 3.8, I am committed to technical excellence and proactive learning.</p>
+                <p>I am a junior student focused on building efficient server-side applications with Node.js and Express, alongside exploring network engineering and cloud infrastructure. With a GPA of 3.8, I am committed to technical excellence and proactive learning.</p>
             </div>
         </section>
 
         <section id="projects" class="container reveal">
             <h2>Technical Competencies</h2>
-            <p>Filter by my areas of expertise:</p>
             
-            <div class="filter-bar">
-                <button class="filter-btn active" data-filter="all">All Skills</button>
-                <button class="filter-btn" data-filter="backend">Backend</button>
-                <button class="filter-btn" data-filter="network">Networking</button>
-                <button class="filter-btn" data-filter="data">Data Science</button>
+            <div class="controls-bar">
+                <div class="filter-bar">
+                    <button class="filter-btn active" data-filter="all">All Skills</button>
+                    <button class="filter-btn" data-filter="backend">Backend</button>
+                    <button class="filter-btn" data-filter="network">Networking</button>
+                    <button class="filter-btn" data-filter="data">Data Science</button>
+                </div>
+                <div class="sort-bar">
+                    <select id="sort-select">
+                        <option value="default">Sort by...</option>
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                    </select>
+                </div>
             </div>
 
             <div class="project-grid" id="skill-grid">
-                <div class="project-card" data-category="backend">
-                    <div class="card-icon">⚙️</div>
+                <div class="project-card" data-category="backend" data-name="Backend Development">
+                    <div class="card-icon">💻</div>
                     <h3>Backend Development</h3>
-                    <p>Knowledge of Django and Flask frameworks, along with SQL for data handling.</p>
+                    <p>Knowledge of Node.js, Express, Django, and SQL for efficient API routing and robust data handling.</p>
                 </div>
-                <div class="project-card" data-category="network">
+                <div class="project-card" data-category="network" data-name="Network Engineering">
                     <div class="card-icon">🌐</div>
                     <h3>Network Engineering</h3>
-                    <p>Cisco Certified (CCNAv7) with foundational skills in network setup and maintenance.</p>
+                    <p>Cisco Certified (CCNAv7) with foundational skills in network setup, maintenance, and cloud security basics.</p>
                 </div>
-                <div class="project-card" data-category="data">
+                <div class="project-card" data-category="data" data-name="Data Science Basics">
                     <div class="card-icon">📊</div>
                     <h3>Data Science Basics</h3>
-                    <p>Proficient in Python libraries like Pandas and Numpy for data visualization.</p>
+                    <p>Proficient in Python libraries like Pandas and Numpy for data analysis and algorithm optimization.</p>
                 </div>
             </div>
         </section>
 
         <section class="container reveal api-section">
-            <div class="api-card">
-                <h3>💡 Daily Tech Insight</h3>
-                <div id="api-content">
-                    <p class="loading">Fetching inspiration from the cloud...</p>
-                </div>
-                <button id="refresh-api" class="btn-small">Get New Insight</button>
+            <h2>Live GitHub Activity</h2>
+            <p>Fetching my latest public repositories directly from GitHub.</p>
+            <div id="github-content" class="repo-grid">
+                <p class="loading">Fetching repositories from the cloud...</p>
             </div>
+            <button id="refresh-api" class="btn-small mt-1">Refresh Repositories</button>
         </section>
 
         <section id="contact" class="container reveal">
             <h2>Contact Me</h2>
-            <p>Email: 594174700 | Based in Saudi Arabia</p>
+            <p>Based in Dhahran, Saudi Arabia</p>
             
             <div id="form-feedback" class="hidden"></div>
 
-            <form id="contact-form">
-                <div class="input-group">
-                    <input type="text" id="name" placeholder="Your Name" required>
-                </div>
-                <div class="input-group">
-                    <input type="email" id="email" placeholder="Your Email" required>
-                </div>
-                <div class="input-group">
-                    <textarea id="message" placeholder="Message for Saad" rows="5" required></textarea>
-                </div>
-                <button type="submit" id="submit-btn">Send Message</button>
-            </form>
+<form id="contact-form" action="https://formspree.io/f/mvzdrzag" method="POST" novalidate>
+    <div class="input-group">
+        <input type="text" id="name" name="name" placeholder="Your Name">
+        <span class="error-msg hidden" id="name-error">Name is required.</span>
+    </div>
+    <div class="input-group">
+        <input type="email" id="email" name="email" placeholder="Your Email">
+        <span class="error-msg hidden" id="email-error">Please enter a valid email.</span>
+    </div>
+    <div class="input-group">
+        <textarea id="message" name="message" placeholder="Message for Saad" rows="5"></textarea>
+        <span class="error-msg hidden" id="message-error">Message cannot be empty.</span>
+    </div>
+    <button type="submit" id="submit-btn">Send Message</button>
+</form>
         </section>
     </main>
 

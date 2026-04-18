@@ -1,10 +1,15 @@
-# AI Usage Report - Saad Alshlowiy
+# AI Usage Report
 
-### Tool used
-Gemini
+### Tools Used & Use Cases
+* **Gemini:** Used for logic architecture, debugging, and advanced JavaScript structuring. Specifically, I utilized Gemini to figure out how to combine filtering logic with sorting logic simultaneously on DOM nodes.
+* **GitHub Copilot (if applicable in your IDE):** Assisted with code completion, specifically generating the Regex code needed for the email validation in the contact form.
 
-### How I used it
-I used the AI to help me write the JavaScript for the theme toggle and the skill filtering. I also asked it for a good public API to use for the data handling part of the assignment. It helped me fix a bug where my scroll animations weren't triggering correctly.
+### Benefits & Challenges
+* **Benefits:** The AI significantly accelerated the process of understanding how to interact with the GitHub REST API. Instead of reading through extensive documentation to find the correct endpoint for a simple repository list, the AI provided the exact `fetch` syntax and endpoints immediately.
+* **Challenges:** Initially, the AI suggested complex frameworks (like React) or overly heavy animation libraries for state management and sorting. I had to prompt it carefully to stick to Vanilla JavaScript to meet the assignment requirements and maintain performance.
 
-### What I changed
-I refactored the code to make it simpler and used my own CSS styles to keep the teal theme I had in Assignment 1. I removed some of the more complex parts the AI suggested (like heavy animations) to keep the site clean and easy to read. I also wrote the HTML and content myself to make sure it reflected my actual background as a KFUPM student.
+### Learning Outcomes
+I learned how to manage DOM states more effectively. Seeing how the AI structured the `sort()` function on an array created from a `NodeList`, and then appending those elements back into the DOM to reorder them without reloading the page, was a major technical takeaway.
+
+### Responsible Use & Modifications
+I refactored the AI's suggestions to fit my specific class names and HTML structure. I removed unnecessary, heavy animations suggested by the AI to keep the site clean, performant, and aligned with the teal/dark theme I designed in Assignment 1. I wrote the content entirely myself to reflect my background as a KFUPM CS student.

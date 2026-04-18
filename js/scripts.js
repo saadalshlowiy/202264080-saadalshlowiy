@@ -1,17 +1,43 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. Dynamic Greeting based on Time ---
-    const greeting = document.getElementById('dynamic-greeting');
-    const hours = new Date().getHours();
-    if (hours < 12) greeting.innerText = "Good Morning ☀️";
-    else if (hours < 18) greeting.innerText = "Good Afternoon ☕";
-    else greeting.innerText = "Good Evening 🌙";
+    // --- 1. State Management & Advanced Greeting ---
+    const greetingText = document.getElementById('dynamic-greeting');
+    const visitorFormContainer = document.getElementById('visitor-form-container');
+    const visitorInput = document.getElementById('visitor-name-input');
+    const saveVisitorBtn = document.getElementById('save-visitor-btn');
 
-    // --- 2. Dark Mode with localStorage ---
+    // Retrieve name from state (localStorage)
+    let visitorName = localStorage.getItem('portfolio-visitor');
+
+    function updateGreeting() {
+        const hours = new Date().getHours();
+        let timeGreeting = "Good Evening 🌙";
+        if (hours < 12) timeGreeting = "Good Morning ☀️";
+        else if (hours < 18) timeGreeting = "Good Afternoon ☕";
+
+        if (visitorName) {
+            greetingText.innerText = `${timeGreeting}, ${visitorName}!`;
+            visitorFormContainer.classList.add('hidden');
+        } else {
+            greetingText.innerText = `${timeGreeting}!`;
+        }
+    }
+
+    updateGreeting();
+
+    saveVisitorBtn.addEventListener('click', () => {
+        const name = visitorInput.value.trim();
+        if (name) {
+            localStorage.setItem('portfolio-visitor', name);
+            visitorName = name;
+            updateGreeting();
+        }
+    });
+
+    // --- 2. Dark Mode State Management ---
     const themeToggle = document.getElementById('theme-toggle');
     const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
     
-    // Apply saved theme
     document.documentElement.setAttribute('data-theme', savedTheme);
     themeToggle.innerText = savedTheme === 'dark' ? '☀️' : '🌙';
 
@@ -24,63 +50,122 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggle.innerText = newTheme === 'dark' ? '☀️' : '🌙';
     });
 
-    // --- 3. Skill Filtering System ---
+    // --- 3. Complex Logic: Filter + Sort System ---
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.project-card');
+    const sortSelect = document.getElementById('sort-select');
+    const skillGrid = document.getElementById('skill-grid');
+    let currentFilter = 'all';
+
+    function renderCards() {
+        // Convert NodeList to Array for sorting
+        let cards = Array.from(document.querySelectorAll('.project-card'));
+        
+        // Apply Filter
+        cards.forEach(card => {
+            if (currentFilter === 'all' || card.dataset.category === currentFilter) {
+                card.style.display = 'block';
+                setTimeout(() => card.style.opacity = '1', 10);
+            } else {
+                card.style.opacity = '0';
+                setTimeout(() => card.style.display = 'none', 300);
+            }
+        });
+
+        // Apply Sort
+        const sortValue = sortSelect.value;
+        if (sortValue !== 'default') {
+            cards.sort((a, b) => {
+                const nameA = a.dataset.name.toLowerCase();
+                const nameB = b.dataset.name.toLowerCase();
+                if (sortValue === 'name-asc') return nameA.localeCompare(nameB);
+                if (sortValue === 'name-desc') return nameB.localeCompare(nameA);
+                return 0;
+            });
+            // Re-append to DOM in new order
+            cards.forEach(card => skillGrid.appendChild(card));
+        }
+    }
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
-            const filter = btn.dataset.filter;
-            cards.forEach(card => {
-                if (filter === 'all' || card.dataset.category === filter) {
-                    card.style.display = 'block';
-                    setTimeout(() => card.style.opacity = '1', 10);
-                } else {
-                    card.style.opacity = '0';
-                    setTimeout(() => card.style.display = 'none', 300);
-                }
-            });
+            currentFilter = btn.dataset.filter;
+            renderCards();
         });
     });
 
-    // --- 4. Fetch Public API Data ---
-    const apiContent = document.getElementById('api-content');
+    sortSelect.addEventListener('change', renderCards);
+
+    // --- 4. API Integration: GitHub Repos ---
+    const githubContent = document.getElementById('github-content');
     const refreshBtn = document.getElementById('refresh-api');
 
-    async function getTechQuote() {
-        apiContent.innerHTML = '<p class="loading">Loading...</p>';
+    async function fetchGitHubRepos() {
+        githubContent.innerHTML = '<p class="loading">Loading repositories...</p>';
         try {
-            // Using the Advice Slip API (Public & Free)
-            const response = await fetch('https://api.adviceslip.com/advice');
+            // Using a generic query or your actual username. Replace 'saadalshlowiy' if needed.
+            const response = await fetch('https://api.github.com/users/github/repos?per_page=3&sort=updated');
             if (!response.ok) throw new Error('API unreachable');
-            const data = await response.json();
-            apiContent.innerHTML = `<p>"${data.slip.advice}"</p>`;
+            const repos = await response.json();
+            
+            githubContent.innerHTML = '';
+            repos.forEach(repo => {
+                const card = document.createElement('div');
+                card.className = 'repo-card';
+                card.innerHTML = `
+                    <h4><a href="${repo.html_url}" target="_blank" style="color: inherit;">${repo.name}</a></h4>
+                    <p>${repo.description || 'No description available.'}</p>
+                    <span class="repo-badge">${repo.language || 'Code'}</span>
+                `;
+                githubContent.appendChild(card);
+            });
         } catch (err) {
-            apiContent.innerHTML = `<p class="error-msg">⚠️ Could not load data. Check your connection.</p>`;
+            githubContent.innerHTML = `<p class="error-msg">⚠️ Could not load GitHub data. Check your connection or API limits.</p>`;
         }
     }
 
-    refreshBtn.addEventListener('click', getTechQuote);
-    getTechQuote(); // Initial call
+    refreshBtn.addEventListener('click', fetchGitHubRepos);
+    fetchGitHubRepos();
 
-    // --- 5. Form Validation & Feedback ---
+    // --- 5. Complex Logic: Form Validation ---
     const contactForm = document.getElementById('contact-form');
-    const feedback = document.getElementById('form-feedback');
+    
+    function validateInput(element, errorElementId, condition) {
+        const errorElement = document.getElementById(errorElementId);
+        if (!condition) {
+            element.classList.add('input-error');
+            errorElement.classList.remove('hidden');
+            return false;
+        } else {
+            element.classList.remove('input-error');
+            errorElement.classList.add('hidden');
+            return true;
+        }
+    }
 
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const name = document.getElementById('name').value;
         
-        // Show Success Feedback
-        feedback.innerText = `Thank you, ${name}! I will get back to you soon.`;
-        feedback.className = 'success';
-        feedback.classList.remove('hidden');
+        const nameEl = document.getElementById('name');
+        const emailEl = document.getElementById('email');
+        const msgEl = document.getElementById('message');
         
-        contactForm.reset();
-        setTimeout(() => feedback.classList.add('hidden'), 5000);
+        // Validation Rules
+        const isNameValid = validateInput(nameEl, 'name-error', nameEl.value.trim() !== '');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const isEmailValid = validateInput(emailEl, 'email-error', emailRegex.test(emailEl.value.trim()));
+        const isMsgValid = validateInput(msgEl, 'message-error', msgEl.value.trim() !== '');
+
+        if (isNameValid && isEmailValid && isMsgValid) {
+            const feedback = document.getElementById('form-feedback');
+            feedback.innerText = `Thank you, ${nameEl.value}! Your message has been sent securely.`;
+            feedback.className = 'success';
+            feedback.classList.remove('hidden');
+            
+            contactForm.reset();
+            setTimeout(() => feedback.classList.add('hidden'), 5000);
+        }
     });
 
     // --- 6. Scroll Reveal Animation ---
