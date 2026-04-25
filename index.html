@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saad Alshlowiy | Portfolio v3</title>
+    <title>Saad Alshlowiy | Portfolio v4</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -14,6 +14,7 @@
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Skills & Projects</a></li>
+                <li><a href="#scraping-showcase">Architecture</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><button id="theme-toggle" class="btn-icon" title="Toggle Theme">🌙</button></li>
             </ul>
@@ -30,8 +31,19 @@
                 </div>
                 
                 <h1>Saad Alshlowiy</h1>
-                <p class="tagline">Computer Science Student at KFUPM | Aspiring Backend Developer</p>
-                <p>I am a junior student focused on building efficient server-side applications with Node.js and Express, alongside exploring network engineering and cloud infrastructure. With a GPA of 3.8, I am committed to technical excellence and proactive learning.</p>
+                <p class="tagline">Computer Science Student at KFUPM | Full-Stack & Systems Engineering</p>
+                <p>I'm currently knocking out the final 15 credits of my CS degree at KFUPM with a 3.7 GPA. I spend most of my time building full-stack apps with React, Node.js, and Express. I also have a strong interest in network engineering, specifically focusing on data centers and AWS cloud infrastructure. Planning to spend some time in Glasgow soon, but right now I'm entirely focused on pushing code and prepping for my SAA-C03 and CCNA certs.</p>
+            </div>
+        </section>
+
+        <section id="scraping-showcase" class="container reveal">
+            <h2>Live Project: Distributed Data Architecture</h2>
+            <div class="project-card" style="border-left-color: #00ff00;">
+                <p>I'm currently building a large-scale web scraping and data architecture project for my portfolio. It handles massive throughput and complex DOM parsing across millions of pages.</p>
+                <div style="margin-top: 15px; padding: 15px; background: var(--dark); border-radius: 6px;">
+                    <span style="color: white; font-family: monospace;">> system_status: <span style="color: #00ff00;">ONLINE</span></span><br>
+                    <span style="color: white; font-family: monospace;">> pages_processed_session: <span id="scraping-stats" class="stats-highlight">1,420,500</span></span>
+                </div>
             </div>
         </section>
 
@@ -40,10 +52,10 @@
             
             <div class="controls-bar">
                 <div class="filter-bar">
-                    <button class="filter-btn active" data-filter="all">All Skills</button>
-                    <button class="filter-btn" data-filter="backend">Backend</button>
-                    <button class="filter-btn" data-filter="network">Networking</button>
-                    <button class="filter-btn" data-filter="data">Data Science</button>
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="dev">Full-Stack</button>
+                    <button class="filter-btn" data-filter="network">Infrastructure</button>
+                    <button class="filter-btn" data-filter="theory">CS Theory</button>
                 </div>
                 <div class="sort-bar">
                     <select id="sort-select">
@@ -55,59 +67,59 @@
             </div>
 
             <div class="project-grid" id="skill-grid">
-                <div class="project-card" data-category="backend" data-name="Backend Development">
+                <div class="project-card" data-category="dev" data-name="Full-Stack Web Dev">
                     <div class="card-icon">💻</div>
-                    <h3>Backend Development</h3>
-                    <p>Knowledge of Node.js, Express, Django, and SQL for efficient API routing and robust data handling.</p>
+                    <h3>Full-Stack Web Dev</h3>
+                    <p>Building interactive UIs with React and styling with CSS, backed by solid Node.js and Express server architectures and custom middleware.</p>
                 </div>
-                <div class="project-card" data-category="network" data-name="Network Engineering">
-                    <div class="card-icon">🌐</div>
-                    <h3>Network Engineering</h3>
-                    <p>Cisco Certified (CCNAv7) with foundational skills in network setup, maintenance, and cloud security basics.</p>
+                <div class="project-card" data-category="network" data-name="Data Centers & Cloud">
+                    <div class="card-icon">☁️</div>
+                    <h3>Data Centers & Cloud</h3>
+                    <p>Studying for AWS Solutions Architect and CCNA certs. Highly interested in data center networking and secure, non-custodial asset management.</p>
                 </div>
-                <div class="project-card" data-category="data" data-name="Data Science Basics">
-                    <div class="card-icon">📊</div>
-                    <h3>Data Science Basics</h3>
-                    <p>Proficient in Python libraries like Pandas and Numpy for data analysis and algorithm optimization.</p>
+                <div class="project-card" data-category="theory" data-name="Algorithm Analysis">
+                    <div class="card-icon">🧠</div>
+                    <h3>Algorithm Analysis</h3>
+                    <p>Deep diving into algorithm efficiency, complexity analysis, and dynamic programming concepts like Q-Learning and the Knapsack problem.</p>
                 </div>
             </div>
         </section>
 
         <section class="container reveal api-section">
             <h2>Live GitHub Activity</h2>
-            <p>Fetching my latest public repositories directly from GitHub.</p>
+            <p>Pulling my latest repository data straight from the GitHub API.</p>
             <div id="github-content" class="repo-grid">
-                <p class="loading">Fetching repositories from the cloud...</p>
+                <p class="loading">Fetching repositories...</p>
             </div>
             <button id="refresh-api" class="btn-small mt-1">Refresh Repositories</button>
         </section>
 
         <section id="contact" class="container reveal">
             <h2>Contact Me</h2>
-            <p>Based in Dhahran, Saudi Arabia</p>
+            <p>Based in Dhahran, Eastern Province.</p>
             
             <div id="form-feedback" class="hidden"></div>
 
-<form id="contact-form" action="https://formspree.io/f/mvzdrzag" method="POST" novalidate>
-    <div class="input-group">
-        <input type="text" id="name" name="name" placeholder="Your Name">
-        <span class="error-msg hidden" id="name-error">Name is required.</span>
-    </div>
-    <div class="input-group">
-        <input type="email" id="email" name="email" placeholder="Your Email">
-        <span class="error-msg hidden" id="email-error">Please enter a valid email.</span>
-    </div>
-    <div class="input-group">
-        <textarea id="message" name="message" placeholder="Message for Saad" rows="5"></textarea>
-        <span class="error-msg hidden" id="message-error">Message cannot be empty.</span>
-    </div>
-    <button type="submit" id="submit-btn">Send Message</button>
-</form>
+            <form id="contact-form" action="https://formspree.io/f/mvzdrzag" method="POST" novalidate>
+                <div class="input-group">
+                    <input type="text" id="name" name="name" placeholder="Your Name">
+                    <span class="error-msg hidden" id="name-error">Name is required.</span>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="email" name="email" placeholder="Your Email">
+                    <span class="error-msg hidden" id="email-error">Please enter a valid email.</span>
+                </div>
+                <div class="input-group">
+                    <textarea id="message" name="message" placeholder="Message for Saad" rows="5"></textarea>
+                    <span class="error-msg hidden" id="message-error">Message cannot be empty.</span>
+                </div>
+                <button type="submit" id="submit-btn">Send Message</button>
+            </form>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Saad Alshlowiy | Built with HTML, CSS, and JS</p>
+        <p>&copy; 2026 Saad Alshlowiy</p>
     </footer>
 
     <script src="js/scripts.js"></script>

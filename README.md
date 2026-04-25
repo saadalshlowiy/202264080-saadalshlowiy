@@ -1,25 +1,26 @@
-# Saad Alshlowiy - Portfolio Assignment 3
+# Saad Alshlowiy - Personal Portfolio v4
 
-This repository contains the code for Assignment 3: Advanced Functionality. It builds upon previous portfolio iterations by introducing complex JavaScript logic, external API integrations, and robust state management.
+This repository contains the code for Assignment 4: Personal Web Application. It represents the final, polished iteration of my portfolio, bringing together all previous technical implementations into a production-ready application. It highlights my core competencies in full-stack web development, network engineering, and algorithm analysis.
+
+## Features & Assignment 4 Updates
+
+* **Innovation Feature (New):** A simulated real-time data ticker representing a high-throughput, distributed web scraping architecture project I am actively developing.
+* **API Integration:** Fetches live repository data dynamically from the public GitHub REST API, now updated with robust `AbortController` timeout handling.
+* **Complex Logic:** * Combined filtering and sorting functionality for the skills grid.
+  * Form validation using Regex and multi-step conditionals to secure submissions via Formspree.
+* **State Management:**
+  * Uses `localStorage` to save user theme preferences (Light/Dark mode) across sessions.
+  * Uses `localStorage` to store the visitor's name, replacing the hero prompt with a personalized greeting upon return visits.
+* **Performance Optimization (New):** Scroll animations utilize the native `IntersectionObserver` API. Elements are unobserved immediately after revealing to minimize main-thread overhead.
 
 ## Setup Instructions
 
-1. Clone the repository: `git clone https://github.com/yourusername/id-name-assignment3.git`
-2. Open the directory in your code editor (e.g., VS Code).
-3. Since this relies on vanilla HTML/CSS/JS, no build step or node modules are required.
-4. Run a local server to view the files correctly (especially for the GitHub API fetch). You can use the VS Code "Live Server" extension.
-5. Open `index.html` in your browser.
-
-## Features Added (Assignment 3)
-
-* **API Integration:** Fetches live repository data dynamically from the public GitHub REST API.
-* **Complex Logic:** * Combined filtering and sorting functionality for the skills grid.
-  * Form validation using Regex and multi-step conditionals to prevent empty submissions.
-* **State Management:**
-  * Uses `localStorage` to save user theme preferences (Light/Dark mode).
-  * Uses `localStorage` to store the visitor's name, replacing the hero prompt with a personalized greeting upon return visits.
-* **Performance:** Cleaned DOM queries, ensured CSS transitions use transform/opacity for GPU acceleration, and optimized script execution.
+1. Clone the repository: `git clone https://github.com/[your-username]/id-name-assignment4.git`
+2. Open the directory in your code editor.
+3. No build step or node modules are required as the project is built with vanilla web technologies.
+4. Open `index.html` in your browser. (Using a local server like VS Code's "Live Server" is recommended for optimal testing of the fetch API).
 
 ## Documentation
 * [AI Usage Report](./docs/ai-usage-report.md)
 * [Technical Documentation](./docs/technical-documentation.md)
+
